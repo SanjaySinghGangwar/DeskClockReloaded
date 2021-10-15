@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Desk Clock</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome">WELCOME</string>
+    <string name="allow">Allow</string>
+    <string name="dismiss">Dismiss</string>
+</resources>

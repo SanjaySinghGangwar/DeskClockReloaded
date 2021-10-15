@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_map"
+    app:startDestination="@id/splash">
+    <fragment
+        android:id="@+id/splash"
+        android:name="com.ajna.deskclock.clock.mActivity.Splash"
+        android:label="splash"
+        tools:layout="@layout/splash">
+        <action
+            android:id="@+id/splashToHome"
+            app:destination="@id/home"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/splash"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/home"
+        android:name="com.ajna.deskclock.clock.mActivity.home.Home"
+        android:label="home"
+        tools:layout="@layout/home">
+        <action
+            android:id="@+id/homeToClassic"
+            app:destination="@id/classic"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/home_to_retroSkin"
+            app:destination="@id/retroSkin" />
+        <action
+            android:id="@+id/home_to_flipIt"
+            app:destination="@id/flipIt" />
+        <action
+            android:id="@+id/home_to_dot"
+            app:destination="@id/dot" />
+    </fragment>
+    <fragment
+        android:id="@+id/classic"
+        android:name="com.ajna.deskclock.clock.mActivity.skins.Classic.Classic"
+        android:label="classic"
+        tools:layout="@layout/classic"/>
+    <fragment
+        android:id="@+id/retroSkin"
+        android:name="com.ajna.deskclock.clock.mActivity.skins.Analog.AnalogSkin"
+        android:label="retro_skin"
+        tools:layout="@layout/analog_skin" />
+    <fragment
+        android:id="@+id/flipIt"
+        android:name="com.ajna.deskclock.clock.mActivity.skins.FlipIt.FlipIt"
+        android:label="flip_it"
+        tools:layout="@layout/flip_it" />
+    <fragment
+        android:id="@+id/dot"
+        android:name="com.ajna.deskclock.clock.mActivity.skins.Dot.Dot"
+        android:label="dot"
+        tools:layout="@layout/dot" />
+</navigation>
