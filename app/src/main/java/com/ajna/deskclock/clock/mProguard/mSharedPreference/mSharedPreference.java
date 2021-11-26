@@ -10,11 +10,6 @@ public class mSharedPreference extends Application {
     private static SharedPreferences.Editor editor;
     private static final String sharedPrefName = "DeskClock";
     private static mSharedPreference mInstance;
-
-
-
-
-
     public static String isFirstTimeRun = "pref_isFirstTimeRun";
 
     @Override
@@ -96,13 +91,11 @@ public class mSharedPreference extends Application {
 
     public static long readLongPref(String key) {
         mSharedPreferences = mInstance.getSharedPreferences(sharedPrefName, Context.MODE_PRIVATE);
-
         return mSharedPreferences.getLong(key, 0);
     }
 
     public static void writeLongPref(String key, long data) {
         mSharedPreferences = mInstance.getSharedPreferences(sharedPrefName, Context.MODE_PRIVATE);
-
         editor = mSharedPreferences.edit();
         editor.putLong(key, data);
         editor.apply();

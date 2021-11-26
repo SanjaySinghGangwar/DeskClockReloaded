@@ -12,9 +12,6 @@ class FlipIt : Fragment() {
 
 
     private var _binding: FlipItBinding? = null
-
-    // This property is only valid between onCreateView and
-// onDestroyView.
     private val bind get() = _binding!!
 
     companion object {
@@ -26,7 +23,7 @@ class FlipIt : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FlipItBinding.inflate(inflater, container, false)
         return bind.root
     }

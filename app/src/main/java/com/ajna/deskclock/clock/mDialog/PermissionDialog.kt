@@ -38,7 +38,7 @@ class PermissionDialog(private val listener: ItemListener) : DialogFragment(),
     private fun initAllComponents() {
 
         bind!!.description.text =
-            "Turn on location service to allow ${getString(R.string.app_name)} to determine your location to get weather report"
+            getString(R.string.location_descripton_two)+"${getString(R.string.app_name)} "+getString(R.string.location_descrippton_two)
 
         bind!!.allow.setOnClickListener(this)
         bind!!.cancel.setOnClickListener(this)

@@ -4,4 +4,8 @@
     <string name="welcome">WELCOME</string>
     <string name="allow">Allow</string>
     <string name="dismiss">Dismiss</string>
+    <string name="classic">Classic</string>
+    <string name="analog">Analog</string>
+    <string name="location_descrippton_two"> to determine your location to get weather report"</string>
+    <string name="location_descripton_two">Turn on location service to allow "</string>
 </resources>

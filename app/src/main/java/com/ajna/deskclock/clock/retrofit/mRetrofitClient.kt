@@ -10,38 +10,6 @@ import java.util.concurrent.TimeUnit
 
 
 object mRetrofitClient {
-
-    /*fun getClient(): mApiInterface {
-
-        val requestInterceptor = Interceptor { chain ->
-
-            val url = chain.request()
-                .url
-                .newBuilder()
-                .build()
-
-            val request = chain.request()
-                .newBuilder()
-                .url(url)
-                .build()
-
-            return@Interceptor chain.proceed(request)
-        }
-
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(requestInterceptor)
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .build()
-
-        return Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl("https://api.openweathermap.org/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(mApiInterface::class.java)
-
-    }*/
-
     private var client: OkHttpClient? = null
     private var retrofit: mApiInterface? = null
 

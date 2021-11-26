@@ -26,7 +26,6 @@ class Dot : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(DotViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }

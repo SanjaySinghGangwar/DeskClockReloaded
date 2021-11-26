@@ -44,7 +44,7 @@ class HomeAdapter(private val context: Context, private val listener: ItemListen
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         holder.bind(items[position])
-        setAnimation(holder.itemView, position);
+        //setAnimation(holder.itemView, position);
     }
 
 

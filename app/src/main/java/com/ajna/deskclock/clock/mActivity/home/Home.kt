@@ -1,5 +1,6 @@
 package com.ajna.deskclock.clock.mActivity.home
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,9 @@ import com.ajna.deskclock.clock.databinding.HomeBinding
 import com.ajna.deskclock.clock.mProguard.ModelClasses.Skins.skins
 import com.ajna.deskclock.clock.mUtils.Utils.mToast
 import com.ajna.deskclock.clock.mUtils.Utils.showToast
+import com.mig35.carousellayoutmanager.CarouselLayoutManager
+import com.mig35.carousellayoutmanager.CarouselZoomPostLayoutListener
+import com.mig35.carousellayoutmanager.CenterScrollListener
 
 
 class Home : Fragment(), HomeAdapter.ItemListener, View.OnClickListener,
@@ -45,13 +49,20 @@ class Home : Fragment(), HomeAdapter.ItemListener, View.OnClickListener,
 
     private fun initRecyclerView() {
         homeAdapter = HomeAdapter(requireContext(), this, this)
+        val layoutManager = CarouselLayoutManager(CarouselLayoutManager.HORIZONTAL, true)
+        layoutManager.setPostLayoutListener(CarouselZoomPostLayoutListener())
+
+        bind.recycler.layoutManager = layoutManager
+        bind.recycler.setHasFixedSize(true)
         bind.recycler.adapter = homeAdapter
+        bind.recycler.addOnScrollListener(CenterScrollListener())
+
     }
 
     private fun addDataToSkinList() {
         skinList = listOf(
-            skins(1, "Classic", R.drawable.skinone),
-            skins(2, "Analog", R.drawable.analog_skin),
+            skins(1, getString(R.string.classic), R.drawable.skinone),
+            skins(2, getString(R.string.analog), R.drawable.analog_skin),
             //skins(3, "Flip It", R.mipmap.ic_launcher),
             //skins(4, "Dot", R.mipmap.ic_launcher)
 
@@ -63,6 +74,8 @@ class Home : Fragment(), HomeAdapter.ItemListener, View.OnClickListener,
     private fun initAlComponents() {
         navController = Navigation.findNavController(requireView())
         bind.setting.setOnClickListener(this)
+
+
     }
 
     override fun onDestroyView() {
