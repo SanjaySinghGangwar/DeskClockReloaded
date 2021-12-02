@@ -5,10 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
+import android.net.Uri
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import java.net.URLEncoder
 import kotlin.math.roundToInt
 
 object Utils {
@@ -33,8 +35,10 @@ object Utils {
     }
 
     fun openGpsIfOff(context: Context) {
-        if (ContextCompat.checkSelfPermission(context,
-                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        if (ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
         ) {
             val service = context.getSystemService(Context.LOCATION_SERVICE)
             var enabled = false
@@ -47,4 +51,27 @@ object Utils {
             }
         }
     }
+
+    fun supportWhatsApp(context: Context) {
+        val i = Intent(Intent.ACTION_VIEW)
+        val phone = "+918218332721"
+        val message = """
+               Hi,
+               I need some help to use DeskClock.
+               
+               """.trimIndent()
+        try {
+            val url = "https://api.whatsapp.com/send?phone=$phone&text=" + URLEncoder.encode(
+                message,
+                "UTF-8"
+            )
+            i.setPackage("com.whatsapp")
+            i.data = Uri.parse(url)
+            context.startActivity(i)
+        } catch (e: Exception) {
+            mToast(context,"Whatsapp not installed")
+            e.printStackTrace()
+        }
+    }
+
 }

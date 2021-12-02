@@ -16,8 +16,8 @@
         android:layout_gravity="center"
         android:orientation="horizontal"
 
-        tools:listitem="@layout/skins_listview"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/skins_listview" />
 
 
     <TextView
@@ -27,6 +27,14 @@
         android:layout_marginTop="16dp"
         android:text="@string/welcome"
         android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="50dp"
+        android:id="@+id/whatsapp"
+        android:layout_height="50dp"
+        android:layout_gravity="right|bottom"
+        android:layout_margin="15dp"
+        android:src="@drawable/whatsapp" />
 
     <TextView
         android:id="@+id/time"

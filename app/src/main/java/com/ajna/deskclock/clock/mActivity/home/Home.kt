@@ -17,10 +17,12 @@ import com.ajna.deskclock.clock.mUtils.Utils.showToast
 import com.mig35.carousellayoutmanager.CarouselLayoutManager
 import com.mig35.carousellayoutmanager.CarouselZoomPostLayoutListener
 import com.mig35.carousellayoutmanager.CenterScrollListener
+import android.content.Intent
+import com.ajna.deskclock.clock.mUtils.Utils.supportWhatsApp
 
 
 class Home : Fragment(), HomeAdapter.ItemListener, View.OnClickListener,
-    HomeAdapter.LongItemListener {
+    HomeAdapter.LongItemListener, View.OnLongClickListener {
 
     val TAG = "HOME"
     private var _binding: HomeBinding? = null
@@ -74,6 +76,8 @@ class Home : Fragment(), HomeAdapter.ItemListener, View.OnClickListener,
     private fun initAlComponents() {
         navController = Navigation.findNavController(requireView())
         bind.setting.setOnClickListener(this)
+        bind.whatsapp.setOnClickListener(this)
+        bind.whatsapp.setOnLongClickListener(this)
 
 
     }
@@ -106,11 +110,23 @@ class Home : Fragment(), HomeAdapter.ItemListener, View.OnClickListener,
             R.id.setting -> {
                 showToast(requireContext(), "setting")
             }
+            R.id.whatsapp->{
+                supportWhatsApp(requireContext())
+            }
         }
     }
 
     override fun onLongClicked(uid: Int) {
         mToast(requireContext(), uid.toString())
+    }
+
+    override fun onLongClick(v: View?): Boolean {
+        when(v?.id){
+            R.id.whatsapp->{
+                mToast(requireContext(),"We can help you on whatsapp")
+            }
+        }
+        return false
     }
 
 
