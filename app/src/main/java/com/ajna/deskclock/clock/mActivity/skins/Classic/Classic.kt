@@ -1,6 +1,7 @@
 package com.ajna.deskclock.clock.mActivity.skins.Classic
 
 import android.annotation.SuppressLint
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -18,8 +19,9 @@ import com.ajna.deskclock.clock.R
 import com.ajna.deskclock.clock.Respo
 import com.ajna.deskclock.clock.databinding.ClassicBinding
 import com.ajna.deskclock.clock.mProguard.ModelClasses.weatherAPI.weatherData
+import com.ajna.deskclock.clock.mProguard.mSharedPreference.AppSharePreference
 import com.ajna.deskclock.clock.mUtils.GPSTracker
-import com.ajna.deskclock.clock.mUtils.Utils.degreeToFahrenheit
+import com.ajna.deskclock.clock.mUtils.Utils
 import com.ajna.deskclock.clock.mUtils.Utils.openGpsIfOff
 import com.ajna.deskclock.clock.retrofit.mApiInterface
 import com.ajna.deskclock.clock.retrofit.mRetrofitClient
@@ -46,6 +48,10 @@ class Classic : Fragment(), View.OnClickListener {
     lateinit var respo: Respo
 
 
+    private var mSharePreference: AppSharePreference? = null
+    private lateinit var mediaPlayer: MediaPlayer
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -60,6 +66,9 @@ class Classic : Fragment(), View.OnClickListener {
     }
 
     private fun initAllComponents() {
+        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.tick)
+
+        mSharePreference = AppSharePreference(requireContext())
 
         navController = Navigation.findNavController(requireView())
         bind.backToHome.setOnClickListener(this)
@@ -78,6 +87,14 @@ class Classic : Fragment(), View.OnClickListener {
         updateTime()
         updateDate()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (mSharePreference!!.isClockSound) {
+            mediaPlayer.start()
+            mediaPlayer.isLooping = true
+        }
     }
 
     private fun updateDate() {
@@ -335,85 +352,99 @@ class Classic : Fragment(), View.OnClickListener {
                 bind.progressBarThree.progress = (6.67 * 15).roundToInt()
                 bind.progressBarFour.progress = (6.67 * 1).roundToInt()
 
-            } "47" -> {
+            }
+            "47" -> {
                 bind.progressBarOne.progress = (6.67 * 15).roundToInt()
                 bind.progressBarTwo.progress = (6.67 * 15).roundToInt()
                 bind.progressBarThree.progress = (6.67 * 15).roundToInt()
                 bind.progressBarFour.progress = (6.67 * 2).roundToInt()
 
-            } "48" -> {
+            }
+            "48" -> {
                 bind.progressBarOne.progress = (6.67 * 15).roundToInt()
                 bind.progressBarTwo.progress = (6.67 * 15).roundToInt()
                 bind.progressBarThree.progress = (6.67 * 15).roundToInt()
                 bind.progressBarFour.progress = (6.67 * 3).roundToInt()
 
-            } "49" -> {
+            }
+            "49" -> {
                 bind.progressBarOne.progress = (6.67 * 15).roundToInt()
                 bind.progressBarTwo.progress = (6.67 * 15).roundToInt()
                 bind.progressBarThree.progress = (6.67 * 15).roundToInt()
                 bind.progressBarFour.progress = (6.67 * 4).roundToInt()
 
-            } "50" -> {
+            }
+            "50" -> {
                 bind.progressBarOne.progress = (6.67 * 15).roundToInt()
                 bind.progressBarTwo.progress = (6.67 * 15).roundToInt()
                 bind.progressBarThree.progress = (6.67 * 15).roundToInt()
                 bind.progressBarFour.progress = (6.67 * 5).roundToInt()
 
-            } "51" -> {
+            }
+            "51" -> {
                 bind.progressBarOne.progress = (6.67 * 15).roundToInt()
                 bind.progressBarTwo.progress = (6.67 * 15).roundToInt()
                 bind.progressBarThree.progress = (6.67 * 15).roundToInt()
                 bind.progressBarFour.progress = (6.67 * 6).roundToInt()
 
-            } "52" -> {
+            }
+            "52" -> {
                 bind.progressBarOne.progress = (6.67 * 15).roundToInt()
                 bind.progressBarTwo.progress = (6.67 * 15).roundToInt()
                 bind.progressBarThree.progress = (6.67 * 15).roundToInt()
                 bind.progressBarFour.progress = (6.67 * 7).roundToInt()
 
-            } "53" -> {
+            }
+            "53" -> {
                 bind.progressBarOne.progress = (6.67 * 15).roundToInt()
                 bind.progressBarTwo.progress = (6.67 * 15).roundToInt()
                 bind.progressBarThree.progress = (6.67 * 15).roundToInt()
                 bind.progressBarFour.progress = (6.67 * 8).roundToInt()
 
-            } "54" -> {
+            }
+            "54" -> {
                 bind.progressBarOne.progress = (6.67 * 15).roundToInt()
                 bind.progressBarTwo.progress = (6.67 * 15).roundToInt()
                 bind.progressBarThree.progress = (6.67 * 15).roundToInt()
                 bind.progressBarFour.progress = (6.67 * 9).roundToInt()
 
-            } "55" -> {
+            }
+            "55" -> {
                 bind.progressBarOne.progress = (6.67 * 15).roundToInt()
                 bind.progressBarTwo.progress = (6.67 * 15).roundToInt()
                 bind.progressBarThree.progress = (6.67 * 15).roundToInt()
                 bind.progressBarFour.progress = (6.67 * 10).roundToInt()
 
-            } "56" -> {
+            }
+            "56" -> {
                 bind.progressBarOne.progress = (6.67 * 15).roundToInt()
                 bind.progressBarTwo.progress = (6.67 * 15).roundToInt()
                 bind.progressBarThree.progress = (6.67 * 15).roundToInt()
                 bind.progressBarFour.progress = (6.67 * 11).roundToInt()
 
-            } "57" -> {
+            }
+            "57" -> {
                 bind.progressBarOne.progress = (6.67 * 15).roundToInt()
                 bind.progressBarTwo.progress = (6.67 * 15).roundToInt()
                 bind.progressBarThree.progress = (6.67 * 15).roundToInt()
                 bind.progressBarFour.progress = (6.67 * 12).roundToInt()
 
-            } "58" -> {
+            }
+            "58" -> {
                 bind.progressBarOne.progress = (6.67 * 15).roundToInt()
                 bind.progressBarTwo.progress = (6.67 * 15).roundToInt()
                 bind.progressBarThree.progress = (6.67 * 15).roundToInt()
                 bind.progressBarFour.progress = (6.67 * 13).roundToInt()
 
-            } "59" -> {
+            }
+            "59" -> {
                 bind.progressBarOne.progress = (6.67 * 15).roundToInt()
                 bind.progressBarTwo.progress = (6.67 * 15).roundToInt()
                 bind.progressBarThree.progress = (6.67 * 15).roundToInt()
                 bind.progressBarFour.progress = (6.67 * 14).roundToInt()
 
-            } "60" -> {
+            }
+            "60" -> {
                 bind.progressBarOne.progress = (6.67 * 15).roundToInt()
                 bind.progressBarTwo.progress = (6.67 * 15).roundToInt()
                 bind.progressBarThree.progress = (6.67 * 15).roundToInt()
@@ -436,7 +467,11 @@ class Classic : Fragment(), View.OnClickListener {
     private fun bindUi(data: weatherData) {
         bind.location.text = data.name
         bind.wind.text = data.wind.speed.roundToInt().toString() + " M/S"
-        bind.temperature.text = degreeToFahrenheit(data.main.temp).toString() + "°C"
+        bind.temperature.text = if (mSharePreference!!.isTemperatureFahrenheit) {
+            Utils.kelvinToFahrenheit(data.main.temp).toString() + "°F"
+        } else {
+            Utils.kelvinToDegree(data.main.temp).toString() + "°C"
+        }
 
     }
 
@@ -453,10 +488,25 @@ class Classic : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.backToHome -> {
+                stopSound()
                 navController.popBackStack()
             }
         }
     }
 
+    fun stopSound() {
+
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.pause()
+            mediaPlayer.stop()
+            //audio is paused here
+        }
+    }
+
+
+    override fun onPause() {
+        stopSound()
+        super.onPause()
+    }
 
 }

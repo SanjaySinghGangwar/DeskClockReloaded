@@ -69,7 +69,7 @@ class Home : Fragment(), HomeAdapter.ItemListener, View.OnClickListener,
             //skins(4, "Dot", R.mipmap.ic_launcher)
 
         )
-        bind.setting.visibility = GONE
+        //bind.setting.visibility = GONE
         homeAdapter.setItems(skinList)
     }
 
@@ -108,7 +108,7 @@ class Home : Fragment(), HomeAdapter.ItemListener, View.OnClickListener,
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.setting -> {
-                showToast(requireContext(), "setting")
+               navController.navigate(R.id.home_to_setting)
             }
             R.id.whatsapp->{
                 supportWhatsApp(requireContext())

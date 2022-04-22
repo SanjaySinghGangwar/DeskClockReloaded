@@ -26,8 +26,12 @@ object Utils {
     }
 
 
-    fun degreeToFahrenheit(fahrenheit: Double): Int {
-        return (fahrenheit - 273.15).roundToInt()
+    fun kelvinToDegree(kelvin: Double): Int {
+        return (kelvin - 273.15).roundToInt()
+    }
+
+    fun kelvinToFahrenheit(kelvin: Double): Int {
+        return ((kelvin-273.15)*9/5+32).roundToInt()
     }
 
     fun mToast(context: Context, message: String) {
@@ -69,7 +73,7 @@ object Utils {
             i.data = Uri.parse(url)
             context.startActivity(i)
         } catch (e: Exception) {
-            mToast(context,"Whatsapp not installed")
+            mToast(context, "Whatsapp not installed")
             e.printStackTrace()
         }
     }

@@ -2,6 +2,7 @@ package com.ajna.deskclock.clock.mActivity.skins.Analog
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -19,8 +20,10 @@ import com.ajna.deskclock.clock.R
 import com.ajna.deskclock.clock.Respo
 import com.ajna.deskclock.clock.databinding.AnalogSkinBinding
 import com.ajna.deskclock.clock.mProguard.ModelClasses.weatherAPI.weatherData
+import com.ajna.deskclock.clock.mProguard.mSharedPreference.AppSharePreference
 import com.ajna.deskclock.clock.mUtils.GPSTracker
 import com.ajna.deskclock.clock.mUtils.Utils
+import com.ajna.deskclock.clock.mUtils.Utils.mToast
 import com.ajna.deskclock.clock.mUtils.Utils.openGpsIfOff
 import com.ajna.deskclock.clock.retrofit.mApiInterface
 import com.ajna.deskclock.clock.retrofit.mRetrofitClient
@@ -36,9 +39,15 @@ class AnalogSkin : Fragment(), View.OnClickListener {
     private val bind get() = _binding!!
     private lateinit var navController: NavController
 
+
+
     lateinit var respo: Respo
     private lateinit var analogSkinViewModel: AnalogSkinViewModel
     var gps: GPSTracker? = null
+
+
+    private lateinit var mediaPlayer: MediaPlayer
+    private var mSharePreference: AppSharePreference? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,8 +73,20 @@ class AnalogSkin : Fragment(), View.OnClickListener {
         updateTimeAndDate()
         bind.backToHome.setOnClickListener(this)
         navController = Navigation.findNavController(requireView())
+
+        mSharePreference = AppSharePreference(requireContext())
+
+        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.tick)
+
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (mSharePreference!!.isClockSound) {
+            mediaPlayer.start()
+            mediaPlayer.isLooping = true
+        }
+    }
 
     private fun updateTimeAndDate() {
         Handler(Looper.getMainLooper()).postDelayed({
@@ -99,7 +120,11 @@ class AnalogSkin : Fragment(), View.OnClickListener {
     private fun bindUi(data: weatherData) {
         bind.location.text = data.name
         bind.wind.text = data.wind.speed.roundToInt().toString() + " M/S"
-        bind.temperature.text = Utils.degreeToFahrenheit(data.main.temp).toString() + "°C"
+        bind.temperature.text = if (mSharePreference!!.isTemperatureFahrenheit) {
+            Utils.kelvinToFahrenheit(data.main.temp).toString() + "°F"
+        } else {
+            Utils.kelvinToDegree(data.main.temp).toString() + "°C"
+        }
 
     }
 
@@ -137,16 +162,32 @@ class AnalogSkin : Fragment(), View.OnClickListener {
         })[AnalogSkinViewModel::class.java]
     }
 
-   /* override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }*/
+    /* override fun onDestroyView() {
+         super.onDestroyView()
+         _binding = null
+     }*/
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.backToHome -> {
+                stopSound()
                 navController.popBackStack()
             }
         }
+    }
+
+    fun stopSound() {
+
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.pause()
+            mediaPlayer.stop()
+            //audio is paused here
+        }
+    }
+
+
+    override fun onPause() {
+        stopSound()
+        super.onPause()
     }
 }

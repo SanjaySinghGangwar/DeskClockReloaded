@@ -40,6 +40,9 @@
         <action
             android:id="@+id/home_to_dot"
             app:destination="@id/dot" />
+        <action
+            android:id="@+id/home_to_setting"
+            app:destination="@id/setting2" />
     </fragment>
     <fragment
         android:id="@+id/classic"
@@ -61,4 +64,9 @@
         android:name="com.ajna.deskclock.clock.mActivity.skins.Dot.Dot"
         android:label="dot"
         tools:layout="@layout/dot" />
+    <fragment
+        android:id="@+id/setting2"
+        android:name="com.ajna.deskclock.clock.mActivity.Setting.Setting"
+        android:label="setting"
+        tools:layout="@layout/setting" />
 </navigation>
